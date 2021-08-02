@@ -2,38 +2,36 @@ import React, { useState, useEffect } from "react";
 import {Text, View, Button} from "react-native";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import BookingScreen from "./BookingScreen";
+import BookingScreen from '../screens/BookingScreen';
 
 export default function CalendarScreen({navigation}) {  // ============Start of function CalendarScreen ==============================
     
-    const [date, setDate] = useState(new Date());
-    
-    const onChange = date => {
-        setDate(date);
-     };
 
-    return (
+    const [value, onChange] = useState(new Date());
+
+    // show bookings and select date to book
+
+
+return (
         <View style={{flex: 1,
             justifyContent: "center",
             alignItems: "center"}}>           
 
-                <Text>Calendar Screen</Text>
+            <Calendar
+               
+                calendarType = {"ISO 8601"}
+                onChange = {onChange}
+                value = {value}
+            />
 
-                <Calendar
-                        value = {date}
-                        onChange = {(date) => setDate(date)}                                      
-            />  
-            Selected date : {date.toLocaleDateString('en-GB')}
-            <Button
-          title="Booking"
-              //Button Title
-              onPress={() =>
-          navigation.navigate('BookingScreen', { paramKey: date.toLocaleDateString('en-GB'),
-          })
-      }
-      />  
-          </View>
-
+                <Button
+                        title="BookingScreen"
+                        onPress={() =>
+                        navigation.navigate('BookingScreen', { paramKey: date.toLocaleDateString('en-GB'),
+                        })
+                        }
+                />  
+        </View>
     );
 
 const styles = StyleSheet.create({

@@ -5,6 +5,9 @@ import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
 import { API, API_BOOKINGS } from "../constants/API";
 import { useSelector } from "react-redux";
+import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
+
+// Do not Amend ======================================================================================
 
 // showing booked dates and time
 export default function IndexScreen({ navigation, route }) { 
@@ -12,6 +15,9 @@ export default function IndexScreen({ navigation, route }) {
   const[bookings, setBookings]=useState([]);
   const[refreshing, setRefreshing]=useState(false);
   
+  const isDark = useSelector((state) => state.accountPrefs.isDark);
+  const styles = { ...commonStyles, ...isDark ? darkStyles : lightStyles }
+
   const token = useSelector((state) => state.auth.token);
   
   useEffect(()  => {
@@ -38,6 +44,8 @@ export default function IndexScreen({ navigation, route }) {
       return removeListener;
     },[]);
 
+// ===  Getting existing Bookings data ========================================================== 
+
   async function getBookings() {
     // const token = await AsyncStorage.getItem("token");
     try {
@@ -56,17 +64,20 @@ export default function IndexScreen({ navigation, route }) {
     }
   }
 
+// okay with API_BOOKINGS ======================================================
+
   async function onRefresh() {
     setRefreshing(true);
     const response = await getBookings()
     setRefreshing(false);
   }
-
+ // ==== okay with refresh Get bookings ============================================
   function addBooking(){
     navigation.navigate("Calendar")
   }
+ // Okay when addBooking is selected, go to Calendar view ====================================
 
-  async function deleteBooking(id) {
+ async function deleteBooking(id) {
     console.log ("Deleting " + id);
     try {
       const response = await axios.delete(API + API_BOOKINGS + `/${id}`, {
@@ -78,6 +89,7 @@ export default function IndexScreen({ navigation, route }) {
       console.log(error)
     }
   }
+// okay cancelling booking ==============================================
 
   const randomHexColor = (rgb) => {
       for (var i=2, col=''; i<6; i++) {
@@ -108,6 +120,7 @@ export default function IndexScreen({ navigation, route }) {
       </TouchableOpacity>
     );
   }
+ /// okay Detail checking =====================================================
 
   return (
       <View style={styles.container}>
@@ -125,6 +138,8 @@ export default function IndexScreen({ navigation, route }) {
           </View>
   );
 };
+
+////////// completed ================================================
 
 const styles = StyleSheet.create({
   image: {

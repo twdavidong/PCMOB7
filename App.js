@@ -8,7 +8,9 @@ import store from "./redux/configureStore";
 import LoggedInTabStack from "./components/LoggedInTabStack";
 import SignInSignUpScreen from "./screens/SignInSignUpScreen";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator(); 
+
+// OK, do not touch! ===============================================================
 
 function App() {
 

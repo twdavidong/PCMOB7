@@ -1,6 +1,6 @@
 export const API = "https://repairaman.pythonanywhere.com"
 export const API_LOGIN = "/auth"
 export const API_SIGNUP = "/newuser"
-export const API_BOOKINGS = "/bookings"
+export const API_BOOKINGS = "/posts"
 export const API_WHOAMI = "/whoami"
-export const API_BOOK = "/booking"
+export const API_BOOK = "/create"

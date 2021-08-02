@@ -1,13 +1,18 @@
 import React from 'react';
-import BookingStack from '../components/BookingStack'
-import UtilisationStack from '../components/UtilisationStack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { useSelector } from 'react-redux';
+import BookingStack from '../components/BookingStack'
+import UtilisationStack from '../components/UtilisationStack';
+import AccountStack from '../components/AccountStack';
+
+// Okay! Do not touch! ======================================================================
 
 const Tab = createBottomTabNavigator();
 
-export default function LoggedInTabStack() {
+export default function LoggedInStack() {
+
+  const isDark = useSelector((state) => state.accountPrefs.isDark);
 
   return (
     <Tab.Navigator
@@ -16,9 +21,11 @@ export default function LoggedInTabStack() {
           let iconName;
 
           if (route.name === 'Booking') {
-            iconName = "comments"
+            iconName = "book"
           } else if (route.name === 'Utilisation') {
-            iconName = "cog"
+            iconName = "briefcase"
+          } else if (route.name === 'Settings') {
+            iconName = "id-card"
           }
           // You can return any component that you like here!
           return <FontAwesome name={iconName} size={size} color={color} />;
@@ -33,6 +40,7 @@ export default function LoggedInTabStack() {
       }}>
         <Tab.Screen name="Booking" component={BookingStack} />
         <Tab.Screen name="Utilisation" component={UtilisationStack} />
+        <Tab.Screen name="Settings" component={AccountStack} />
       </Tab.Navigator>
   )
 }

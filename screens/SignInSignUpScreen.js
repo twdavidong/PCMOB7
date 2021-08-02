@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { loginAction } from '../redux/ducks/bookingAuth';
 import axios from 'axios';
 
+// Okay, do not touch! ==========================================================================
+
   if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
     UIManager.setLayoutAnimationEnabledExperimental(true);
   } //Needs to be manually enabled for android
