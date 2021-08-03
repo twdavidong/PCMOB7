@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {Text, View, Button} from "react-native";
+import {StyleSheet, Text, View, Button} from "react-native";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import BookingScreen from '../screens/BookingScreen';
 
 export default function CalendarScreen({navigation}) {  // ============Start of function CalendarScreen ==============================
     
-
+    
     const [value, onChange] = useState(new Date());
-
+ 
     // show bookings and select date to book
 
 
@@ -18,21 +17,15 @@ return (
             alignItems: "center"}}>           
 
             <Calendar
-               
                 calendarType = {"ISO 8601"}
-                onChange = {onChange}
                 value = {value}
+                onChange = {() =>  navigation.navigate("BookingScreen", { paramKey: value.toLocaleDateString('en-GB'),})}
+      
             />
-
-                <Button
-                        title="BookingScreen"
-                        onPress={() =>
-                        navigation.navigate('BookingScreen', { paramKey: date.toLocaleDateString('en-GB'),
-                        })
-                        }
-                />  
         </View>
     );
+}
+
 
 const styles = StyleSheet.create({
                     
@@ -130,7 +123,9 @@ const styles = StyleSheet.create({
                 height: 40,
                 },
         });
-}
+
+
+
 
 /*
 <Datepicker

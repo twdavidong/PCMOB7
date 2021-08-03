@@ -21,7 +21,7 @@ export default function BookingStack() {
   return (
     <InnerStack.Navigator>
       <InnerStack.Screen name="Index" component={IndexScreen} options={{ title: "Index", ...headerOptions, headerLeft: null }} />
-      <InnerStack.Screen name="Calendar" component={CalendarScreen} options={{ title: "Add", ...headerOptions, headerLeft: null }} />
+      <InnerStack.Screen name="Calendar" component={CalendarScreen} options={{ title: "Add", ...headerOptions, headerLeft: null }} />      
     </InnerStack.Navigator>
   )
 }
