@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from "react";
 import {StyleSheet, Text, View, Button} from "react-native";
+import {render} from "react-dom";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 export default function CalendarScreen({navigation}) {  // ============Start of function CalendarScreen ==============================
     
     
-    const [value, onChange] = useState(new Date());
+    const [date, setDate] = useState(new Date());
  
+    const onChange = date => { 
+            setDate(date);
+    };
+
+       // navigation.navigate("BookingScreen", 
+        //                    { paramKey: setDate(date).toLocaleDateString('en-GB'),
+        //                    })
+                    
     // show bookings and select date to book
-
-
+   
 return (
         <View style={{flex: 1,
             justifyContent: "center",
             alignItems: "center"}}>           
-
             <Calendar
                 calendarType = {"ISO 8601"}
-                value = {value}
-                onChange = {() =>  navigation.navigate("BookingScreen", { paramKey: value.toLocaleDateString('en-GB'),})}
-      
+                onChange = {onChange}
+                value = {date}
             />
+        {console.log(date)}    
         </View>
+        
     );
-}
+};
 
 
 const styles = StyleSheet.create({
@@ -123,8 +131,6 @@ const styles = StyleSheet.create({
                 height: 40,
                 },
         });
-
-
 
 
 /*

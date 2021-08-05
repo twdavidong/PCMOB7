@@ -69,7 +69,7 @@ async function savePost() {
   return (
       <View style = {{margin: 20}}>
           <Text>Date: {JSON.stringify(paramKey)}</Text>
-
+            console.log({route.params.paramKey})
 
         <Text style = {[additionalStyles.label, styles.text]}>Enter Name</Text>
           <TextInput style = {additionalStyles.input}
