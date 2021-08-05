@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import CalendarScreen from '../screens/CalendarScreen';
 import IndexScreen from '../screens/IndexScreen';
+import BookingScreen from '../screens/BookingScreen';
 import { lightStyles, darkStyles } from '../styles/commonStyles';
 import { useSelector } from 'react-redux';
 
@@ -21,7 +22,8 @@ export default function BookingStack() {
   return (
     <InnerStack.Navigator>
       <InnerStack.Screen name="Index" component={IndexScreen} options={{ title: "Index", ...headerOptions, headerLeft: null }} />
-      <InnerStack.Screen name="Calendar" component={CalendarScreen} options={{ title: "Add", ...headerOptions, headerLeft: null }} />      
+      <InnerStack.Screen name="Calendar" component={CalendarScreen} options={{ title: "Add", ...headerOptions, headerLeft: null }} />
+      <InnerStack.Screen name="BookingScreen" component={BookingScreen} options={{ title: "Booking Confirmation", ...headerOptions, headerLeft: null }} />      
     </InnerStack.Navigator>
   )
 }

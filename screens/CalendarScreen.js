@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from "react";
 import {StyleSheet, Text, View, Button} from "react-native";
-import {render} from "react-dom";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
+
+
 export default function CalendarScreen({navigation}) {  // ============Start of function CalendarScreen ==============================
-    
-    
+        
     const [date, setDate] = useState(new Date());
- 
-    const onChange = date => { 
+     const onChange = date => { 
             setDate(date);
     };
 
-       // navigation.navigate("BookingScreen", 
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+    
+        return [day, month, year].join('-');
+    }
+     
+
+    // navigation.navigate("BookingScreen", 
         //                    { paramKey: setDate(date).toLocaleDateString('en-GB'),
         //                    })
                     
@@ -28,9 +43,15 @@ return (
                 onChange = {onChange}
                 value = {date}
             />
-        {console.log(date)}    
+        {console.log(formatDate(date))}
+            
+        <Button
+        title="Confirm"
+        onPress={() => 
+                navigation.navigate('BookingScreen',{paramKey:date } )}
+      />
+
         </View>
-        
     );
 };
 
@@ -132,8 +153,10 @@ const styles = StyleSheet.create({
                 },
         });
 
-
+//     
 /*
+
+
 <Datepicker
     colors={[                               // highlighting
         { 

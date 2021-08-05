@@ -10,29 +10,53 @@ import { useSelector } from "react-redux";
 
 export default function BookingScreen ({navigation, route})  {  // aka Create Screen
 
+  const isDark = useSelector((state) => state.accountPrefs.isDark);
+  const styles = { ...commonStyles, ...isDark ? darkStyles : lightStyles }
+  
+  const token = useSelector((state) => state.auth.token);
+
+// ======================================================================================================
+
+   const { paramKey } = route.params;
+
     const [bname, setName] = useState("");
     const [bookdate, setBookdate] = useState("");
 
     const [booking, setBooking] = useState([]);
 
-    const isDark = useSelector((state) => state.accountPrefs.isDark);
-    const styles = { ...commonStyles, ...isDark ? darkStyles : lightStyles }
-    
-    const token = useSelector((state) => state.auth.token);
+async function savePost() {
+  const post = {
+    "name": bname,
+    "bookdate": bookdate, 
+  }
+  
+  try {
+    console.log(token);
+    const response = await axios.post(API + API_BOOK, post, {
+      headers: { Authorization: `JWT ${token}` }
+    });
+    console.log(response.data)
+    navigation.navigate("Index", { post: post })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-    const { paramKey } = route.params;
+  return (
+    <View style={styles.container}>
+    <Text style={styles.heading}>
+      React Native Pass Value From One Screen to Another
+      Using React Navigation
+    </Text>
+    <Text style={styles.textStyle}>
+      Values passed from First page: {route.params.paramKey}
+    </Text>
+  </View>
+        );
+  }; 
+ 
 
-    useEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <TouchableOpacity onPress={addBooking}>
-
-
-                </TouchableOpacity>
-            )
-        })
-    })
-
+  
     //Monitor route.params for changes and add items to the database
 
  //   useEffect(() => {
@@ -48,46 +72,6 @@ export default function BookingScreen ({navigation, route})  {  // aka Create Sc
 
 // Button to select AM/PM or period time slot maybe 1hr-2hrs??
 // eg 9am  and then select no. of hours needed?
-
-async function savePost() {
-  const post = {
-    "name": bname,
-    "bookdate": bookdate, 
-  }
-  try {
-    console.log(token);
-    const response = await axios.post(API + API_BOOK, post, {
-      headers: { Authorization: `JWT ${token}` }
-    });
-    console.log(response.data)
-    navigation.navigate("Index", { post: post })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-  return (
-      <View style = {{margin: 20}}>
-          <Text>Date: {JSON.stringify(paramKey)}</Text>
-            console.log({route.params.paramKey})
-
-        <Text style = {[additionalStyles.label, styles.text]}>Enter Name</Text>
-          <TextInput style = {additionalStyles.input}
-            value = {bname}
-            onChangeText = {text => setName(text)}
-            />
-        <Text style = {[additionalStyles.label, styles.text]}>Enter BookDate:</Text>
-          <TextInput style = {additionalStyles.input}
-            value = {bookdate}
-            onChangeText = {text => setBookdate(text)}
-            />
-          <TouchableOpacity style={[styles.button, {margin: 20}]} onPress={savePost}>
-            <Text style= {styles.buttonText}>Save</Text>
-            </TouchableOpacity>
-        </View>
-        );
-  }; 
- 
                    
         /*    <Text>Values passed from First page: {route.params.setSchedule}</Text> */
 
@@ -116,3 +100,21 @@ async function savePost() {
         attachement: "signature",
     })
 */
+
+/**
+ *        <Text style = {[additionalStyles.label, styles.text]}>Enter Name</Text>
+          <TextInput style = {additionalStyles.input}
+            value = {bname}
+            onChangeText = {text => setName(text)}
+            />
+        <Text style = {[additionalStyles.label, styles.text]}>Enter BookDate:</Text>
+          <TextInput style = {additionalStyles.input}
+            value = {bookdate}
+            onChangeText = {text => setBookdate(text)}
+            />
+          <TouchableOpacity style={[styles.button, {margin: 20}]} onPress={savePost}>
+            <Text style= {styles.buttonText}>Save</Text>
+            </TouchableOpacity>
+ * 
+ * 
+ */

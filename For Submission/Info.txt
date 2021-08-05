@@ -1,0 +1,109 @@
+user = json_data["user"]  #who booked
+            date = json_data["date"] #booking date
+            slot = json_data["slot"]    #booking period
+            status = json_data["status"]        #status: booked, cancelled,
+            reason = json_data["reason"]        #reason for cancellation
+            occupied = json_data["occupied"]      #time of arrival
+            released = json_data["released"]    #time leaving
+            usage = json_data["usage"] #calculation usage based on no. of hours
+            special = json_data["special"] # for admin purpose
+
+ "user":"sarahchin@dmail.com",
+"bookdate":"16/08/2021",
+"period":"9am-11am",
+"bstatus":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"hrsusage":"",
+"special":""
+
+"user":"michelleang@dmail.com",
+"date":"16/08/2021",
+"period":"1pm-3pm",
+"status":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"usage":"",
+"special":""
+
+"user":"sophiaong@dmail.com",
+"date":"17/08/2021",
+"period":"9am-12pm",
+"status":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"usage":"",
+"special":""
+
+"user":"nicoleng@dmail.com",
+"date":"17/08/2021",
+"period":"1pm-5pm",
+"status":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"usage":"",
+"special":""
+
+"user":"luciatan@dmail.com",
+"date":"18/08/2021",
+"period":"9am-11am",
+"status":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"usage":"",
+"special":""
+
+"user":"jacelyntay@dmail.com",
+"date":"18/08/2021",
+"period":"2pm-4pm",
+"status":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"usage":"",
+"special":""
+
+"user":"aprillim@dmail.com",
+"date":"19/08/2021",
+"period":"9am-12pm",
+"status":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"usage":"",
+"special":""
+
+"user":"bettylow@dmail.com",
+"date":"19/08/2021",
+"period":"1pm-5pm",
+"status":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"usage":"",
+"special":""
+
+"user":"chloeleong@dmail.com",
+"date":"20/08/2021",
+"period":"9am-11am",
+"status":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"usage":"",
+"special":""
+
+"user":"daisylum@dmail.com",
+"date":"20/08/2021",
+"period":"1pm-3pm",
+"status":"reserved",
+"reason":"",
+"occupied":"",
+"released":"",
+"usage":"",
+"special":""
