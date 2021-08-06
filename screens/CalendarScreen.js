@@ -3,15 +3,12 @@ import {StyleSheet, Text, View, Button} from "react-native";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-
-
 export default function CalendarScreen({navigation}) {  // ============Start of function CalendarScreen ==============================
         
     const [date, setDate] = useState(new Date());
      const onChange = date => { 
             setDate(date);
     };
-
 
     function formatDate(date) {
         var d = new Date(date),
@@ -43,17 +40,16 @@ return (
                 onChange = {onChange}
                 value = {date}
             />
-        {console.log(formatDate(date))}
-            
-        <Button
-        title="Confirm"
-        onPress={() => 
-                navigation.navigate('BookingScreen',{paramKey:date } )}
-      />
-
+                {console.log(formatDate(date))}
+            <Button
+                title="Confirm"
+                onPress={() => 
+                    navigation.navigate('BookingScreen',{paramKey: formatDate(date)})}
+            />
         </View>
-    );
-};
+        );
+}
+
 
 
 const styles = StyleSheet.create({
