@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # EDIT THE ____ ON THE NEXT LINE
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////home/repairaman/_____/db.sqlite"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////home/repairaman/mysite/db.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "mysecretkey"
 app.config["JWT_EXPIRATION_DELTA"] = datetime.timedelta(days=1)
@@ -18,11 +18,14 @@ db = SQLAlchemy(app)
 class BookPosts(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(4096))
-    content = db.Column(db.String(4096))
-
+    bookdate = db.Column(db.String(4096))
+    session1 = db.Column(db.String(4096))
+    session2 = db.Column(db.String(4096))
+    session3 = db.Column(db.String(4096))
+    session4 = db.Column(db.String(4096))
+    
     def json(self):
-        return {"id": self.id, "title": self.title, "content": self.content}
+        return {"id": self.id, "bookdate": self.bookdate, "session1": self.session1, "session2": self.session2, "session3": self.session3, "session4": self.session4}
 
 class Users(db.Model):
 
@@ -48,9 +51,12 @@ def createPost():
     if request.is_json:
         try:
             json_data = request.get_json()
-            title = json_data["title"]
-            content = json_data["content"]
-            post = BookPosts(title=title, content=content)
+            bookdate = json_data["bookdate"]
+            session1 = json_data["session1"]
+            session2 = json_data["session2"]
+            session3 = json_data["session3"]
+            session4 = json_data["session4"]
+            post = BookPosts(bookdate=bookdate, session1=session1, session2=session2, session3=session3, session4=session4)
             db.session.add(post)
             db.session.commit()
             return post.json()
@@ -87,10 +93,16 @@ def getPost(id):
             json_data = request.get_json()
 
             # check if the key exists in the dictionary
-            if 'title' in json_data:
-                post.title = json_data['title']
-            if 'content' in json_data:
-                post.content = json_data['content']
+            if 'bookdate' in json_data:
+                post.bookdate = json_data['bookdate']
+            if 'session1' in json_data:
+                post.session1 = json_data['session1']
+                if 'session2' in json_data:
+                post.session2 = json_data['session2']
+                if 'session3' in json_data:
+                post.session3 = json_data['session3']
+                if 'session4' in json_data:
+                post.session4 = json_data['session4']
             else:
                 abort(400)
             db.session.commit()

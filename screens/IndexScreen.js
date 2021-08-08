@@ -98,11 +98,35 @@ export default function IndexScreen({ navigation, route }) {
       return '#'+col;
   }
 
+  const sessn1 = () => setSessn1('8am');
+  const [sessn2, setSessn2] = useState("");
+  const [sessn3, setSessn3] = useState("");
+  const [sessn4, setSessn4] = useState("");
+
+   function sessionTog(item) {
+    if (item.session1 == true) {
+      console.log(item.session1)
+      setSessn1 = "8am-10am"
+    } else if (item.session2 == true) {
+      console.log(item.session2)
+      setSessn2 = "10am-12pm"
+    } else if (item.session3 == true) {
+      console.log(item.session3)
+      setSessn3 = "1pm-3pm"
+    } else if (item.session4 == true) {
+      console.log(item.session4)
+      setSessn4 = "3pm-5pm"
+      }
+
+  }
+
   function renderItem({item}) {
     return (
+
       <TouchableOpacity onPress={() => 
         navigation.navigate("Details",{id : item.id})}>
         <View style={{ 
+          flex:   5,
           padding: 10,
           paddingTop: 10,
           paddingBottom: 10,
@@ -112,11 +136,13 @@ export default function IndexScreen({ navigation, route }) {
           justifyContent: "space-between",
           backgroundColor: randomHexColor(),
         }}>
-          <Text style={styles.baseText}>{item.title}</Text>
+      <Text style={styles.baseText}>Date               8am    10am    1pm    3pm
+          {"\n" + item.bookdate + "    " + item.session1 + "     " + item.session2 + "     " + item.session3 + "     " + item.session4}</Text>
           <TouchableOpacity onPress={() => deleteBooking(item.id)}>
             <FontAwesome name= "trash" size={20} color ="#b80000" />
           </TouchableOpacity>
-        </View>
+         
+        </View> 
       </TouchableOpacity>
     );
   }
@@ -148,7 +174,7 @@ const styles = StyleSheet.create({
   },
   baseText: {
       fontFamily: "Cochin-BoldItalic",
-      fontSize: 40,
+      fontSize: 20,
   },
   titleText: {
     fontSize: 50,

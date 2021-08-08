@@ -107,3 +107,13 @@ user = json_data["user"]  #who booked
 "released":"",
 "usage":"",
 "special":""
+
+
+"bookdate":"11-08-2021",
+"session1":"true",
+"session2":"false",
+"session3":"false",
+"session4":"false"
+
+"username" :"repairaman",
+"password":"mickeymouse"

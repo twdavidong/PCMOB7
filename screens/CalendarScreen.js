@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from "react";
-import {StyleSheet, Text, View, Button} from "react-native";
+import {StyleSheet, Text, View, Button, RefreshControl, TouchableOpacity} from "react-native";
+
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import axios from "axios";
+import { API, API_BOOKINGS, API_POSTS } from "../constants/API";
+import { commonStyles, darkStyles, lightStyles } from "../styles/commonStyles";
+import { useSelector } from "react-redux";
+
+import { FontAwesome } from "@expo/vector-icons";
+
+
 
 export default function CalendarScreen({navigation}) {  // ============Start of function CalendarScreen ==============================
         
+//    const token = useSelector((state) => state.auth);
+    const isDark = useSelector((state) => state.accountPrefs.isDark);
+    const styles = {...commonStyles, ...isDark ? darkStyles : lightStyles };
+
     const [date, setDate] = useState(new Date());
      const onChange = date => { 
             setDate(date);
@@ -24,15 +37,9 @@ export default function CalendarScreen({navigation}) {  // ============Start of 
         return [day, month, year].join('-');
     }
      
-
-    // navigation.navigate("BookingScreen", 
-        //                    { paramKey: setDate(date).toLocaleDateString('en-GB'),
-        //                    })
-                    
-    // show bookings and select date to book
-   
 return (
-        <View style={{flex: 1,
+
+        <View style={styles.title, {flex: 1,
             justifyContent: "center",
             alignItems: "center"}}>           
             <Calendar
@@ -42,7 +49,7 @@ return (
             />
                 {console.log(formatDate(date))}
             <Button
-                title="Confirm"
+                title="Confirm and Proceed"
                 onPress={() => 
                     navigation.navigate('BookingScreen',{paramKey: formatDate(date)})}
             />

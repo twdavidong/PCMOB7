@@ -1,33 +1,35 @@
 import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity, View, CheckBox } from "react-native";
-import {useState, useEffect} from "react";
-import { TextInput } from "react-native-gesture-handler";
-import ToggleButton from 'react-toggle-button';
-import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
+import {useState} from "react";
 import axios from "axios";
 import { API, API_BOOK } from "../constants/API";  //API_BOOK is /create
+import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
 import { useSelector } from "react-redux";
 
 export default function BookingScreen ({route, navigation})  {  // aka Create Screen
-
+  
+  const token = useSelector((state) => state.auth);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
   const styles = { ...commonStyles, ...isDark ? darkStyles : lightStyles }
-  
-  const token = useSelector((state) => state.auth.token);
-
+    
 // ======================================================================================================
 
-const { paramKey } = route.params;
+  const { paramKey } = route.params;
 
-const [bname, setName] = useState("");
-const [bookdate, setBookdate] = useState("");
-
-const [booking, setBooking] = useState([]);
+  const [bookdate, setBookdate] = useState(paramKey);  // taking booked date from Calendar param
+  const [session1 , set1Session] = useState("");
+  const [session2 , set2Session] = useState("");
+  const [session3 , set3Session] = useState("");
+  const [session4 , set4Session] = useState("");  
 
 async function savePost() {
   const post = {
-    "name": bname,
     "bookdate": bookdate, 
+    "session1": session1,
+    "session2": session2,
+    "session3": session3,
+    "session4": session4, 
+     
   }
   try {
     console.log(token);
@@ -41,38 +43,42 @@ async function savePost() {
   }
 }
 
-const [is1Selected, set1Selection] = useState(false);
-const [is2Selected, set2Selection] = useState(false);
-const [is3Selected, set3Selection] = useState(false);
-const [is4Selected, set4Selection] = useState(false);
-
-
 return (
-
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={styles.container}>
             <Text>Booking Screen</Text>
-            <Text>paramKey: {JSON.stringify(paramKey)}</Text>
-
-            <CheckBox
-              center
-              value= {is1Selected}
-              onValueChange = {set1Selection}
-            />       <Text>8am-10am: {is1Selected ? "👍" : "👎"}</Text>
-                        <CheckBox
-              center
-              value= {is2Selected}
-              onValueChange = {set2Selection}
-            />       <Text>10am-12pm: {is2Selected ? "👍" : "👎"}</Text>
-                        <CheckBox
-              center
-              value= {is3Selected}
-              onValueChange = {set3Selection}
-            />       <Text>1pm-3pm: {is3Selected ? "👍" : "👎"}</Text>
-                        <CheckBox
-              center
-              value= {is4Selected}
-              onValueChange = {set4Selection}
-            />       <Text>3pm-5pm: {is4Selected ? "👍" : "👎"}</Text>
+            <TouchableOpacity style={[styles.button, {marginTop: 20}]} onPress={savePost}>
+            <Text>Select session on {bookdate}</Text>
+                <Text>8am-10am:</Text>
+              <CheckBox
+                style={styles.checkbox}
+                value= {session1}
+                
+                onValueChange = { () => session1 ? set1Session(false) : set1Session(true)}
+                />
+                <Text>10am-12pm:</Text>
+                <CheckBox
+                style={styles.checkbox}
+                value= {session2}
+                onValueChange = { () =>  session2 ? set2Session(false) : set2Session(true)}
+                />
+                <Text>1pm-3pm:</Text>
+                <CheckBox
+                style={styles.checkbox}
+                value= {session3}
+                onValueChange = { () => session3 ? set3Session(false) : set3Session(true)}
+                />
+                <Text>3pm-5pm:</Text>
+              <CheckBox
+                style={styles.checkbox}
+                value= {session4}
+                onValueChange = { () => session4 ? set4Session(false) : set4Session(true)}
+                />
+                 
+                <Text style={styles.buttonText}>
+                Save
+              </Text>
+            </TouchableOpacity>
+ 
           </View>
 
 
@@ -90,10 +96,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   checkbox: {
+    justifyContent: "center",
     alignSelf: "center",
   },
   label: {
-    margin: 8,
+    margin: 20,
   },
 });
 

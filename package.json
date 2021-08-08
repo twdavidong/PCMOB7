@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.15.5",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^5.11.11",
     "@react-navigation/native": "^5.9.4",
@@ -21,10 +22,13 @@
     "react-datetime-picker": "^3.3.0",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-camera": "^4.0.1",
     "react-native-elements": "^3.4.2",
+    "react-native-qrcode-scanner": "^1.5.4",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-web": "~0.13.12",
     "react-navigation-stack": "^2.10.4",
+    "react-qr-barcode-scanner": "^1.0.6",
     "react-redux": "^7.2.4",
     "react-time-picker": "^4.3.0",
     "react-toggle-button": "^2.2.0"
